@@ -5,6 +5,10 @@
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
 
+$diff = filter_input(INPUT_GET, 'diff', FILTER_SANITIZE_NUMBER_FLOAT);
+$diffhigh = $diff + 0.1;
+$difflow = $diff - 0.1;
+    
 // Array for JSON response
 $response = array();
 
@@ -15,7 +19,8 @@ require_once __DIR__ . '/db_connect.php';
 $db = new DB_CONNECT();
 
 // Get a random link from the links table
-$result = mysql_query("SELECT * FROM links ORDER BY RAND() LIMIT 2") or die(mysql_error());
+$result = mysql_query(
+    "SELECT * FROM links WHERE anstype='T' AND difficulty BETWEEN $difflow AND $diffhigh ORDER BY RAND() LIMIT 1") or die(mysql_error());
 
 // check for empty result
 if (mysql_num_rows($result) > 0) {
@@ -28,8 +33,10 @@ if (mysql_num_rows($result) > 0) {
         $product = array();
         $product["songtitleA"] = $row["songtitleA"];
         $product["artistA"] = $row["artistA"];
+        $product["itemA"] = $row["itemA"];
         $product["songtitleB"] = $row["songtitleB"];
         $product["artistB"] = $row["artistB"];
+        $product["itemB"] = $row["itemB"];
         $product["linktype"] = $row["linktype"];
         $product["extra"] = $row["extra"];
 
