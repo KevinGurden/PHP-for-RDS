@@ -3,6 +3,7 @@
  * Following code will list all the products
  */
 header('Content-Type: application/json');
+header('Access-Control-Allow-Origin: *');
 
 // Array for JSON response
 $response = array();
