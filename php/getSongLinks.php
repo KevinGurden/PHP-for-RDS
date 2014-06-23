@@ -3,7 +3,7 @@
  * Retrun all links from a particular song */
 header('Access-Control-Allow-Origin: *');
 
-$songid = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
+$songid = filter_input(INPUT_GET, 'songid', FILTER_SANITIZE_NUMBER_INT);
 $artist = filter_input(INPUT_GET, 'artist', FILTER_SANITIZE_STRING); $artist = str_replace("%_%"," ",$artist);  // Get rid of underscores
 $difflow = filter_input(INPUT_GET, 'difflow', FILTER_SANITIZE_NUMBER_FLOAT); $difflow = floatval($difflow/1000); // Passed at x1000 to avoid decimals
 $diffhigh = filter_input(INPUT_GET, 'diffhigh', FILTER_SANITIZE_NUMBER_FLOAT); $diffhigh = floatval($diffhigh/1000); // Ditto
@@ -23,8 +23,9 @@ require_once __DIR__ . '/db_connect.php';
 $db = new DB_CONNECT();
 
 // Get link from the links table
-$avoid = "LOCATE(linktype, '$avoidLTs')=0 AND LOCATE(songidB, '$avoidSongs')=0";
-$select = "SELECT * FROM links WHERE songidA=$songid AND artistA='$artist' AND (difficulty BETWEEN $difflow AND $diffhigh) AND $avoid";
+if ($avoidLTs!="") {$avoidLTs = "AND LOCATE(linktype, '$avoidLTs')=0";
+if ($avoidSongs!="") {$avoidSongs = "AND LOCATE(songidB, '$avoidSongs')=0";
+$select = "SELECT * FROM links WHERE songidA=$songid AND artistA='$artist' AND (difficulty BETWEEN $difflow AND $diffhigh) $avoidLTs $avoidSongs";
 $result = mysql_query($select) or die(mysql_error());
 
 // check for empty result
