@@ -23,8 +23,8 @@ require_once __DIR__ . '/db_connect.php';
 $db = new DB_CONNECT();
 
 // Get link from the links table
-$avoid = "LOCATE(linktype, $avoidLTs)=0 AND LOCATE(songidB, $avoidSongs)=0";
-$select = "SELECT * FROM links WHERE songtitleA=$songid AND artistA=$artist AND (difficulty BETWEEN $difflow AND $diffhigh) AND $avoid";
+$avoid = "LOCATE(linktype, '$avoidLTs')=0 AND LOCATE(songidB, '$avoidSongs')=0";
+$select = "SELECT * FROM links WHERE songtitleA=$songid AND artistA='$artist' AND (difficulty BETWEEN $difflow AND $diffhigh) AND $avoid";
 $result = mysql_query($select) or die(mysql_error());
 
 // check for empty result
