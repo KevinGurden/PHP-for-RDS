@@ -3,16 +3,16 @@
  * Retrun all links from a particular song */
 header('Access-Control-Allow-Origin: *');
 
-$songid = filter_input(INPUT_GET, 'songid', FILTER_SANITIZE_NUMBER_INT);
-$artistp = filter_input(INPUT_GET, 'artist', FILTER_SANITIZE_STRING);
+$songid = $_GET['songid']; //filter_input(INPUT_GET, 'songid', FILTER_SANITIZE_NUMBER_INT);
+$artist = $_GET['artist']; //$artistp = filter_input(INPUT_GET, 'artist', FILTER_SANITIZE_STRING);
     header('Content-Type: text/html');
 error_log("getSongLinks: songid=$songid, artistp=$artistp");
 /* $artist = str_replace("_"," ",$artistp);  // Get rid of underscores
-    error_log("getSongLinks: songid=$songid, artist=$artist");*/
-    $difflow = filter_input(INPUT_GET, 'difflow', FILTER_SANITIZE_NUMBER_FLOAT); //$difflow = floatval($difflow/1000); // Passed at x1000 to avoid decimals
-$diffhigh = filter_input(INPUT_GET, 'diffhigh', FILTER_SANITIZE_NUMBER_FLOAT); //$diffhigh = floatval($diffhigh/1000); // Ditto
-$avoidLTs = filter_input(INPUT_GET, 'avlts', FILTER_SANITIZE_STRING);
-$avoidSongs = filter_input(INPUT_GET, 'avsongs', FILTER_SANITIZE_STRING);
+error_log("getSongLinks: songid=$songid, artist=$artist");*/
+$difflow = $_GET('difflow'); //filter_input(INPUT_GET, 'difflow', FILTER_SANITIZE_NUMBER_FLOAT); //$difflow = floatval($difflow/1000); // Passed at x1000 to avoid decimals
+$diffhigh = $_GET('diffhigh'); //filter_input(INPUT_GET, 'diffhigh', FILTER_SANITIZE_NUMBER_FLOAT); //$diffhigh = floatval($diffhigh/1000); // Ditto
+$avoidLTs = $_GET('avoidlts'); //filter_input(INPUT_GET, 'avlts', FILTER_SANITIZE_STRING);
+$avoidSongs = $_GET('avoidsongs'); filter_input(INPUT_GET, 'avsongs', FILTER_SANITIZE_STRING);
     
 header('Content-Type: text/html');
 error_log("getSongLinks: songid=$songid, artist=$artist, difflow=$difflow, diffhigh=$diffhigh, avoidLTs=$avoidLTs, avoidSongs=$avoidSongs");
