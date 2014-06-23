@@ -21,7 +21,7 @@ require_once __DIR__ . '/db_connect.php';
 $db = new DB_CONNECT();
 
 // Get a random link from the links table
-$select = "SELECT * FROM links WHERE anstype='T' AND difficulty BETWEEN $diff-0.1 AND $diff+0.1 ORDER BY RAND() LIMIT 1";
+$select = "SELECT * FROM links WHERE anstype='T' AND difficulty BETWEEN $difflow AND $diffhigh ORDER BY RAND() LIMIT 1";
 $result = mysql_query($select) or die(mysql_error());
 
 // check for empty result

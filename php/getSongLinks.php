@@ -4,10 +4,12 @@
  */
 header('Access-Control-Allow-Origin: *');
 
-$title = filter_input(INPUT_GET, 'title', FILTER_SANITIZE_NUMBER_FLOAT); $difflow = floatval($difflow);
-$difflow = filter_input(INPUT_GET, 'difflow', FILTER_SANITIZE_NUMBER_FLOAT); $difflow = floatval($difflow);
-$diffhigh = filter_input(INPUT_GET, 'diffhig', FILTER_SANITIZE_NUMBER_FLOAT); $diffhigh = floatval($diffhigh);
-
+$title = filter_input(INPUT_GET, 'title', FILTER_SANITIZE_NUMBER_TEXT);
+$artist = filter_input(INPUT_GET, 'artist', FILTER_SANITIZE_NUMBER_TEXT);
+$difflow = filter_input(INPUT_GET, 'difflow', FILTER_SANITIZE_NUMBER_FLOAT); $difflow = floatval($difflow/1000);
+$diffhigh = filter_input(INPUT_GET, 'diffhigh', FILTER_SANITIZE_NUMBER_FLOAT); $diffhigh = floatval($diffhigh/1000);
+$avoidLTs = filter_input(INPUT_GET, 'avlts', FILTER_SANITIZE_NUMBER_TEXT);
+$avoidSongs = filter_input(INPUT_GET, 'avsongs', FILTER_SANITIZE_NUMBER_TEXT);
     
 header('Content-Type: text/html');
 error_log("getRandomLink: diffhigh = $diffhigh and difflow = $difflow");
