@@ -1,6 +1,6 @@
 <?php
 /*
- * Following code will list all the products
+ * Return 1 random link
  */
 header('Access-Control-Allow-Origin: *');
 

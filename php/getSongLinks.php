@@ -1,13 +1,12 @@
 <?php
 /*
- * Following code will list all the products
- */
+ * Retrun all links from a particular song */
 header('Access-Control-Allow-Origin: *');
 
-$title = filter_input(INPUT_GET, 'title', FILTER_SANITIZE_NUMBER_TEXT);
-$artist = filter_input(INPUT_GET, 'artist', FILTER_SANITIZE_NUMBER_TEXT);
-$difflow = filter_input(INPUT_GET, 'difflow', FILTER_SANITIZE_NUMBER_FLOAT); $difflow = floatval($difflow/1000);
-$diffhigh = filter_input(INPUT_GET, 'diffhigh', FILTER_SANITIZE_NUMBER_FLOAT); $diffhigh = floatval($diffhigh/1000);
+$songid = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
+$artist = filter_input(INPUT_GET, 'artist', FILTER_SANITIZE_NUMBER_TEXT); $artist = str_replace("%_%"," ",$artistp);  // Get rid of underscores
+$difflow = filter_input(INPUT_GET, 'difflow', FILTER_SANITIZE_NUMBER_FLOAT); $difflow = floatval($difflow/1000); // Passed at x1000 to avoid decimals
+$diffhigh = filter_input(INPUT_GET, 'diffhigh', FILTER_SANITIZE_NUMBER_FLOAT); $diffhigh = floatval($diffhigh/1000); // Ditto
 $avoidLTs = filter_input(INPUT_GET, 'avlts', FILTER_SANITIZE_NUMBER_TEXT);
 $avoidSongs = filter_input(INPUT_GET, 'avsongs', FILTER_SANITIZE_NUMBER_TEXT);
     
@@ -23,8 +22,9 @@ require_once __DIR__ . '/db_connect.php';
 // connecting to db
 $db = new DB_CONNECT();
 
-// Get a random link from the links table
-$select = "SELECT * FROM links WHERE anstype='T' AND difficulty BETWEEN $diff-0.1 AND $diff+0.1 ORDER BY RAND() LIMIT 1";
+// Get link from the links table
+$avoid = "LOCATE(linktype, $avoidLTs)=0 AND LOCATE(songidB, $avoidSongs)=0";
+$select = "SELECT * FROM links WHERE songtitleA=$songid AND artistA=$artist AND (difficulty BETWEEN $difflow AND $diffhigh) AND $avoid";
 $result = mysql_query($select) or die(mysql_error());
 
 // check for empty result
