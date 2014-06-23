@@ -4,8 +4,12 @@
 header('Access-Control-Allow-Origin: *');
 
 $songid = filter_input(INPUT_GET, 'songid', FILTER_SANITIZE_NUMBER_INT);
-$artist = filter_input(INPUT_GET, 'artist', FILTER_SANITIZE_STRING); $artist = str_replace("%_%"," ",$artist);  // Get rid of underscores
-$difflow = filter_input(INPUT_GET, 'difflow', FILTER_SANITIZE_NUMBER_FLOAT); $difflow = floatval($difflow/1000); // Passed at x1000 to avoid decimals
+$artist = filter_input(INPUT_GET, 'artist', FILTER_SANITIZE_STRING);
+    header('Content-Type: text/html');
+    error_log("getSongLinks: songid=$songid, artist=$artist");
+$artist = str_replace("%_%"," ",$artist);  // Get rid of underscores
+    error_log("getSongLinks: songid=$songid, artist=$artist");
+    $difflow = filter_input(INPUT_GET, 'difflow', FILTER_SANITIZE_NUMBER_FLOAT); $difflow = floatval($difflow/1000); // Passed at x1000 to avoid decimals
 $diffhigh = filter_input(INPUT_GET, 'diffhigh', FILTER_SANITIZE_NUMBER_FLOAT); $diffhigh = floatval($diffhigh/1000); // Ditto
 $avoidLTs = filter_input(INPUT_GET, 'avlts', FILTER_SANITIZE_STRING);
 $avoidSongs = filter_input(INPUT_GET, 'avsongs', FILTER_SANITIZE_STRING);
