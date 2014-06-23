@@ -3,6 +3,8 @@
  * Retrun all links from a particular song */
 header('Access-Control-Allow-Origin: *');
 
+header('Content-Type: text/html');
+error_log("getSongLinks: songid=$songid, artist=$artist, difflow=$difflow, diffhigh=$diffhigh, avoidLTs=$avoidLTs, avoidSongs=$avoidSongs");
 $songid = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
 $artist = filter_input(INPUT_GET, 'artist', FILTER_SANITIZE_STRING); $artist = str_replace("%_%"," ",$artist);  // Get rid of underscores
 $difflow = filter_input(INPUT_GET, 'difflow', FILTER_SANITIZE_NUMBER_FLOAT); $difflow = floatval($difflow/1000); // Passed at x1000 to avoid decimals
@@ -24,7 +26,7 @@ $db = new DB_CONNECT();
 
 // Get link from the links table
 $avoid = "LOCATE(linktype, '$avoidLTs')=0 AND LOCATE(songidB, '$avoidSongs')=0";
-$select = "SELECT * FROM links WHERE songtitleA=$songid AND artistA='$artist' AND (difficulty BETWEEN $difflow AND $diffhigh) AND $avoid";
+$select = "SELECT * FROM links WHERE songidA=$songid AND artistA='$artist' AND (difficulty BETWEEN $difflow AND $diffhigh) AND $avoid";
 $result = mysql_query($select) or die(mysql_error());
 
 // check for empty result
