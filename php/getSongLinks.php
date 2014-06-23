@@ -38,16 +38,13 @@ if (mysql_num_rows($result) > 0) {
     while ($row = mysql_fetch_array($result)) {
         // temp user array
         $product = array();
-        $product["songtitleA"] = $row["songtitleA"];
-        $product["artistA"] = $row["artistA"];
-        $product["itemA"] = $row["itemA"];
-        $product["songtitleB"] = $row["songtitleB"];
-        $product["artistB"] = $row["artistB"];
-        $product["itemB"] = $row["itemB"];
-        $product["linktype"] = $row["linktype"];
-        $product["extra"] = $row["extra"];
-        $product["difficulty"] = $row["difficulty"];
-        $product["anstype"] = $row["anstype"];
+        $product["songtitleA"] = $row["songtitleA"]; $product["artistA"] = $row["artistA"];
+        $product["itemA"] = $row["itemA"]; $product["arttypeA"] = $row["arttypeA"];
+        $product["songtitleB"] = $row["songtitleB"]; $product["artistB"] = $row["artistB"];
+        $product["itemB"] = $row["itemB"]; $product["arttypeB"] = $row["arttypeB"];
+        $product["linktype"] = $row["linktype"]; $product["extra"] = $row["extra"];
+        $product["difficulty"] = $row["difficulty"]; $product["anstype"] = $row["anstype"];
+        $product["need"] = $row["need"];
 
         // push single link into final response array
         array_push($response["links"], $product);
