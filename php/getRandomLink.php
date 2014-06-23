@@ -52,7 +52,7 @@ if (mysql_num_rows($result) > 0) {
     $response["success"] = 0;
     $response["message"] = "No links found ($select)";
     header('Content-Type: text/html');
-    error_log($respnse["message"]);
+    error_log($response["message"]);
 
     // echo no users JSON
     echo json_encode($response);
