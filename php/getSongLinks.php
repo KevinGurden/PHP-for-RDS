@@ -4,15 +4,12 @@
  */
 header('Access-Control-Allow-Origin: *');
 
+$title = filter_input(INPUT_GET, 'title', FILTER_SANITIZE_NUMBER_FLOAT); $difflow = floatval($difflow);
+$difflow = filter_input(INPUT_GET, 'difflow', FILTER_SANITIZE_NUMBER_FLOAT); $difflow = floatval($difflow);
+$diffhigh = filter_input(INPUT_GET, 'diffhig', FILTER_SANITIZE_NUMBER_FLOAT); $diffhigh = floatval($diffhigh);
+
+    
 header('Content-Type: text/html');
-$diff = filter_input(INPUT_GET, 'diff', FILTER_SANITIZE_NUMBER_FLOAT);
-error_log("getRandomLink: diff1 = $diff");
-$diff = floatval($diff);  // Convert to float
-error_log("getRandomLink: diff2 = $diff");
-$difff = floatval($diff);  // Convert to float
-error_log("getRandomLink: difff = $difff");
-$diffhigh = $diff + 0.1;  // Set higher limit on difficulty
-$difflow = $diff - 0.1;   // .. and for lower
 error_log("getRandomLink: diffhigh = $diffhigh and difflow = $difflow");
 
 // Array for JSON response
