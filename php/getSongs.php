@@ -15,7 +15,7 @@ $db = new DB_CONNECT();
 
 // Get a list of songs
 $result = mysql_query(
-    "SELECT songtitle,artist FROM songs") or die(mysql_error());
+    "SELECT songid,songtitle,artist FROM songs") or die(mysql_error());
 
 // check for empty result
 if (mysql_num_rows($result) > 0) {
