@@ -9,7 +9,7 @@ $diff = floatval($diff);  // Convert to float
 $diffhigh = $diff + 0.1;  // Set higher limit on difficulty
 $difflow = $diff - 0.1;   // .. and for lower
 header('Content-Type: text/html');
-error_log($response["getRandomLink: diffhigh = $diffhigh and difflow = $difflow"]);
+error_log("getRandomLink: diffhigh = $diffhigh and difflow = $difflow");
 
 // Array for JSON response
 $response = array();
