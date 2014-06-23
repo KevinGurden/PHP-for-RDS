@@ -2,7 +2,6 @@
 /*
  * Following code will list all the products
  */
-header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
 
 $diff = filter_input(INPUT_GET, 'diff', FILTER_SANITIZE_NUMBER_FLOAT);
@@ -19,13 +18,13 @@ require_once __DIR__ . '/db_connect.php';
 $db = new DB_CONNECT();
 
 // Get a random link from the links table
-$result = mysql_query(
-    "SELECT * FROM links WHERE anstype='T' AND difficulty BETWEEN $difflow AND $diffhigh ORDER BY RAND() LIMIT 1") or die(mysql_error());
+$select = "SELECT * FROM links WHERE anstype='T' AND difficulty BETWEEN $difflow AND $diffhigh ORDER BY RAND() LIMIT 1";
+$result = mysql_query($select) or die(mysql_error());
 
 // check for empty result
 if (mysql_num_rows($result) > 0) {
+    header('Content-Type: application/json');
     // looping through all results
-    // products node
     $response["links"] = array();
     
     while ($row = mysql_fetch_array($result)) {
@@ -49,9 +48,11 @@ if (mysql_num_rows($result) > 0) {
     // echoing JSON response
     echo json_encode($response);
 } else {
-    // no products found
+    header('Content-Type: application/json');
     $response["success"] = 0;
-    $response["message"] = "No products found";
+    $response["message"] = "No links found ($select)";
+    header('Content-Type: text/html');
+    error_log($respnse["message"]);
 
     // echo no users JSON
     echo json_encode($response);
