@@ -4,10 +4,10 @@
 header('Access-Control-Allow-Origin: *');
 
 $songid = filter_input(INPUT_GET, 'songid', FILTER_SANITIZE_NUMBER_INT);
-$artist = filter_input(INPUT_GET, 'artist', FILTER_SANITIZE_STRING);
+$artistp = filter_input(INPUT_GET, 'artist', FILTER_SANITIZE_STRING);
     header('Content-Type: text/html');
-    error_log("getSongLinks: songid=$songid, artist=$artist");
-$artist = str_replace("%_%"," ",$artist);  // Get rid of underscores
+error_log("getSongLinks: songid=$songid, artistp=$artistp");
+$artist = str_replace("_"," ",$artistp);  // Get rid of underscores
     error_log("getSongLinks: songid=$songid, artist=$artist");
     $difflow = filter_input(INPUT_GET, 'difflow', FILTER_SANITIZE_NUMBER_FLOAT); $difflow = floatval($difflow/1000); // Passed at x1000 to avoid decimals
 $diffhigh = filter_input(INPUT_GET, 'diffhigh', FILTER_SANITIZE_NUMBER_FLOAT); $diffhigh = floatval($diffhigh/1000); // Ditto
@@ -28,7 +28,7 @@ $db = new DB_CONNECT();
 
 // Get link from the links table
 if ($avoidLTs!="") {$avoidLTs = "AND LOCATE(linktype, '$avoidLTs')=0";};
-    if ($avoidSongs!="") {$avoidSongs = "AND LOCATE(songidB, '$avoidSongs')=0";};
+if ($avoidSongs!="") {$avoidSongs = "AND LOCATE(songidB, '$avoidSongs')=0";};
 $select = "SELECT * FROM links WHERE songidA=$songid AND artistA='$artist' AND (difficulty BETWEEN $difflow AND $diffhigh) $avoidLTs $avoidSongs";
 $result = mysql_query($select) or die(mysql_error());
 
