@@ -4,12 +4,12 @@
  */
 header('Access-Control-Allow-Origin: *');
 
-$songid = $_GET['songid']; //filter_input(INPUT_GET, 'songid', FILTER_SANITIZE_NUMBER_INT);
-$artist = $_GET['artist']; //$artistp = filter_input(INPUT_GET, 'artist', FILTER_SANITIZE_STRING);
-$difflow = $_GET('difflow'); //filter_input(INPUT_GET, 'difflow', FILTER_SANITIZE_NUMBER_FLOAT); //$difflow = floatval($difflow/1000); // Passed at x1000 to avoid decimals
-$diffhigh = $_GET('diffhigh'); //filter_input(INPUT_GET, 'diffhigh', FILTER_SANITIZE_NUMBER_FLOAT); //$diffhigh = floatval($diffhigh/1000); // Ditto
-$avoidLTs = $_GET('avoidlts'); //filter_input(INPUT_GET, 'avlts', FILTER_SANITIZE_STRING);
-$avoidSongs = $_GET('avoidsongs'); filter_input(INPUT_GET, 'avsongs', FILTER_SANITIZE_STRING);
+$songid = $_GET('songid');
+$artist = $_GET('artist');
+$difflow = $_GET('difflow');
+$diffhigh = $_GET('diffhigh');
+$avoidLTs = $_GET('avoidlts');
+$avoidSongs = $_GET('avoidsongs');
     
 header('Content-Type: text/html');
 error_log("getSongLinks: songid=$songid, artist=$artist, difflow=$difflow, diffhigh=$diffhigh, avoidLTs=$avoidLTs, avoidSongs=$avoidSongs");
