@@ -11,7 +11,7 @@ $avoidLTs = filter_input(INPUT_GET, 'avlts', FILTER_SANITIZE_STRING);
 $avoidSongs = filter_input(INPUT_GET, 'avsongs', FILTER_SANITIZE_STRING);
     
 header('Content-Type: text/html');
-error_log("getRandomLink: diffhigh = $diffhigh and difflow = $difflow");
+error_log("getSongLinks: songid=$songid, artist=$artist, difflow=$difflow, diffhigh=$diffhigh, avoidLTs=$avoidLTs, avoidSongs=$avoidSongs");
 
 // Array for JSON response
 $response = array();
@@ -44,6 +44,7 @@ if (mysql_num_rows($result) > 0) {
         $product["itemB"] = $row["itemB"];
         $product["linktype"] = $row["linktype"];
         $product["extra"] = $row["extra"];
+        $product["difficulty"] = $row["difficulty"];
 
         // push single link into final response array
         array_push($response["links"], $product);
