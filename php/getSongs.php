@@ -25,6 +25,7 @@ if (mysql_num_rows($result) > 0) {
     while ($row = mysql_fetch_array($result)) {
         // temp user array
         $product = array();
+        $product["songid"] = $row["songid"];
         $product["songtitle"] = $row["songtitle"];
         $product["artist"] = $row["artist"];
 
