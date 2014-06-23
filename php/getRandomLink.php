@@ -5,9 +5,12 @@
 header('Access-Control-Allow-Origin: *');
 
 $diff = filter_input(INPUT_GET, 'diff', FILTER_SANITIZE_NUMBER_FLOAT);
-$diffhigh = $diff + 0.1;
-$difflow = $diff - 0.1;
-    
+$diff = floatval($diff);  // Convert to float
+$diffhigh = $diff + 0.1;  // Set higher limit on difficulty
+$difflow = $diff - 0.1;   // .. and for lower
+header('Content-Type: text/html');
+error_log($response["getRandomLink: diffhigh = $diffhigh and difflow = $difflow"]);
+
 // Array for JSON response
 $response = array();
 
@@ -18,7 +21,7 @@ require_once __DIR__ . '/db_connect.php';
 $db = new DB_CONNECT();
 
 // Get a random link from the links table
-$select = "SELECT * FROM links WHERE anstype='T' AND difficulty BETWEEN $difflow AND $diffhigh ORDER BY RAND() LIMIT 1";
+$select = "SELECT * FROM links WHERE anstype='T' AND difficulty BETWEEN $diff-0.1 AND $diff+0.1 ORDER BY RAND() LIMIT 1";
 $result = mysql_query($select) or die(mysql_error());
 
 // check for empty result
