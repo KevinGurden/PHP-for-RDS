@@ -38,8 +38,10 @@ if (mysql_num_rows($result) > 0) {
     while ($row = mysql_fetch_array($result)) {
         // temp user array
         $product = array();
+        $product["songidA"] = $row["songidA"];
         $product["songtitleA"] = $row["songtitleA"]; $product["artistA"] = $row["artistA"];
         $product["itemA"] = $row["itemA"]; $product["arttypeA"] = $row["arttypeA"];
+        $product["songidB"] = $row["songidB"];
         $product["songtitleB"] = $row["songtitleB"]; $product["artistB"] = $row["artistB"];
         $product["itemB"] = $row["itemB"]; $product["arttypeB"] = $row["arttypeB"];
         $product["linktype"] = $row["linktype"]; $product["extra"] = $row["extra"];
