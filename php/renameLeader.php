@@ -36,5 +36,5 @@ $result = mysql_query($select) or die(mysql_error());
 //
 //    // echo no users JSON
 //    echo json_encode($response);
-}
+//}
 ?>
