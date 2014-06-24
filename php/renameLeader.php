@@ -4,8 +4,8 @@
  */
 header('Access-Control-Allow-Origin: *');
 
-$newName = filter_input(INPUT_GET, 'name', FILTER_SANITIZE_STRING); $newName = str_replace("_"," ",$newName);  // Get rid of underscores
-$uuid = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_STRING);
+$songid = $_GET['name'];
+$uuid = $_GET['uuid'];
     
 // Array for JSON response
 $response = array();

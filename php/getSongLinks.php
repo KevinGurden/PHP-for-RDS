@@ -46,7 +46,7 @@ if (mysql_num_rows($result) > 0) {
         $product["itemB"] = $row["itemB"]; $product["arttypeB"] = $row["arttypeB"];
         $product["linktype"] = $row["linktype"]; $product["extra"] = $row["extra"];
         $product["difficulty"] = $row["difficulty"]; $product["anstype"] = $row["anstype"];
-        $product["need"] = $row["need"]; $product["incorrect"] = $row["incorrect"]; 
+        $product["need"] = $row["need"]; $product["incorrect"] = $row["incorrect"];
 
         // push single link into final response array
         array_push($response["links"], $product);
