@@ -4,7 +4,7 @@
  */
 header('Access-Control-Allow-Origin: *');
 
-$songid = $_GET['name'];
+$newName = $_GET['name'];
 $uuid = $_GET['uuid'];
     
 // Array for JSON response
