@@ -4,7 +4,7 @@
  */
 header('Access-Control-Allow-Origin: *');
 
-$songid = $_GET['diff'];
+$diff = $_GET['diff'];
 $diffhigh = $diff + 0.1;  // Set higher limit on difficulty
 $difflow = $diff - 0.1;   // .. and for lower
 
