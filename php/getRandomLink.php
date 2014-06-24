@@ -4,12 +4,9 @@
  */
 header('Access-Control-Allow-Origin: *');
 
-header('Content-Type: text/html');
-$diff = filter_input(INPUT_GET, 'diff', FILTER_SANITIZE_NUMBER_INT);
-error_log("getRandomLink: diff1 = $diff");
-$diffhigh = ($diff/1000) + 0.1;  // Set higher limit on difficulty
-$difflow = ($diff/1000) - 0.1;   // .. and for lower
-error_log("getRandomLink: diffhigh = $diffhigh and difflow = $difflow");
+$songid = $_GET['diff'];
+$diffhigh = $diff + 0.1;  // Set higher limit on difficulty
+$difflow = $diff - 0.1;   // .. and for lower
 
 // Array for JSON response
 $response = array();
