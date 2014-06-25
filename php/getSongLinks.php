@@ -20,8 +20,12 @@ $response = array();
 // Include db connect class
 require_once __DIR__ . '/db_connect.php';
 
+error_log("getSongLinks connect");
+
 // connecting to db
 $db = new DB_CONNECT();
+
+error_log("getSongLinks query");
 
 // Get link from the links table
 if ($avoidLTs!="") {$avoidLTs = "AND LOCATE(linktype, '$avoidLTs')=0";};
@@ -29,6 +33,8 @@ if ($avoidSongs!="") {$avoidSongs = "AND LOCATE(songidB, '$avoidSongs')=0";};
 $select = "SELECT * FROM links WHERE songidA=$songid AND artistA='$artist' AND (difficulty BETWEEN $difflow AND $diffhigh) $avoidLTs $avoidSongs";
 $result = mysql_query($select) or die(mysql_error());
 
+error_log("getSongLinks done query");
+    
 // check for empty result
 if (mysql_num_rows($result) > 0) {
     header('Content-Type: application/json');
@@ -56,6 +62,7 @@ if (mysql_num_rows($result) > 0) {
 
     // echoing JSON response
     echo json_encode($response);
+    error_log("getSongLinks sent");
 } else {
     header('Content-Type: application/json');
     $response["success"] = 0;
