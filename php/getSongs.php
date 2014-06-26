@@ -7,22 +7,23 @@ header('Access-Control-Allow-Origin: *');
 // Array for JSON response
 $response = array();
 
-// Include db connect class
-require_once __DIR__ . '/db_connect.php';
-
+require_once __DIR__ . '/db_config.php';
 // connecting to db
-$db = new DB_CONNECT();
+$con = mysqli_connect(DB_SERVER, DB_USER, DB_PASSWORD, DB_DATABASE);
+if (mysqli_connect_errno()) {
+    error_log("Failed to connect to MySQL: " . mysqli_connect_error());
+};
 
 // Get a list of songs
-$result = mysql_query(
-    "SELECT songid,songtitle,artist FROM songs ORDER BY RAND() LIMIT 25") or die(mysql_error());
+$result = mysqli_query(, $con,
+    "SELECT songid,songtitle,artist FROM songs ORDER BY RAND() LIMIT 25") or die(mysqli_error());
 
 // check for empty result
-if (mysql_num_rows($result) > 0) {
+if (mysqli_num_rows($result) > 0) {
     // looping through all results
     $response["songs"] = array();
     
-    while ($row = mysql_fetch_array($result)) {
+    while ($row = mysqli_fetch_array($result)) {
         // temp user array
         $product = array();
         $product["songid"] = $row["songid"];

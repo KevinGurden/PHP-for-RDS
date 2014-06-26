@@ -18,7 +18,6 @@ require_once __DIR__ . '/db_config.php';
 $con = mysqli_connect(DB_SERVER, DB_USER, DB_PASSWORD, DB_DATABASE);
 if (mysqli_connect_errno()) {
     error_log("Failed to connect to MySQL: " . mysqli_connect_error());
-    error_log(mysqli_connect_error());
 };
     
 // Get a random link from the links table
