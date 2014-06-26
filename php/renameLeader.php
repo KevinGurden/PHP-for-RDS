@@ -11,30 +11,16 @@ $uuid = $_GET['uuid'];
 $response = array();
 
 // Include db connect class
-require_once __DIR__ . '/db_connect.php';
+require_once __DIR__ . '/db_config.php';
 
 // connecting to db
-$db = new DB_CONNECT();
+$con = mysqli_connect(DB_SERVER, DB_USER, DB_PASSWORD, DB_DATABASE);
+if (mysqli_connect_errno()) {
+    error_log("Failed to connect to MySQL: " . mysqli_connect_error());
+};
+
 
 // Get link from the links table
 $select = "UPDATE leaders SET name='$newname' WHERE uuid=$uuid";
-$result = mysql_query($select) or die(mysql_error());
-
-//// check for empty result
-//if (mysql_num_rows($result) > 0) {
-//    header('Content-Type: application/json');
-//    $response["success"] = 1;
-//
-//    // echoing JSON response
-//    echo json_encode($response);
-//} else {
-//    header('Content-Type: application/json');
-//    $response["success"] = 0;
-//    $response["message"] = "No links found ($select)";
-//    header('Content-Type: text/html');
-//    error_log($response["message"]);
-//
-//    // echo no users JSON
-//    echo json_encode($response);
-//}
+$result = mysqli_query($con, $select) or die(mysql_error());
 ?>
