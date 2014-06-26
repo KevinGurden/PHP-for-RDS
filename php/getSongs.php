@@ -1,6 +1,7 @@
 <?php
 /*
- * Get a list of songs */
+ * Get a list of songs
+ */
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
 
@@ -15,7 +16,7 @@ if (mysqli_connect_errno()) {
 };
 
 // Get a list of songs
-$result = mysqli_query(, $con,
+$result = mysqli_query($con,
     "SELECT songid,songtitle,artist FROM songs ORDER BY RAND() LIMIT 25") or die(mysqli_error());
 
 // check for empty result
