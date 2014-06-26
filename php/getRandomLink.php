@@ -31,7 +31,7 @@ if (mysqli_num_rows($result) > 0) {
     // looping through all results
     $response["links"] = array();
     
-    while ($row = mysql_fetch_array($result)) {
+    while ($row = mysqli_fetch_array($result)) {
         // temp user array
         $product = array();
         $product["songtitleA"] = $row["songtitleA"];
