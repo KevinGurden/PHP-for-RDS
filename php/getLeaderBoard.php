@@ -12,23 +12,26 @@ $loc = filter_input(INPUT_GET, 'loc', FILTER_SANITIZE_STRING); $loc = str_replac
 $response = array();
 
 // Include db connect class
-require_once __DIR__ . '/db_connect.php';
+require_once __DIR__ . '/db_config.php';
 
 // connecting to db
-$db = new DB_CONNECT();
+$con = mysqli_connect(DB_SERVER, DB_USER, DB_PASSWORD, DB_DATABASE);
+if (mysqli_connect_errno()) {
+    error_log("Failed to connect to MySQL: " . mysqli_connect_error());
+};
 
 // Get a list of leaders
 $cols = "area,city,country,date7,score7,dateall,scoreall,name,uuid";
 $locs = "CONCAT(city,'>',area,'>',country)='$loc' OR CONCAT(area,'>',country)='$loc' OR country='$loc'";
-$result = mysql_query(
-    "SELECT $cols FROM leaders WHERE $locs ORDER BY score$days DESC LIMIT 50") or die(mysql_error());
+$result = mysqli_query($con,
+    "SELECT $cols FROM leaders WHERE $locs ORDER BY score$days DESC LIMIT 50") or die(mysqli_error());
 
 // check for empty result
-if (mysql_num_rows($result) > 0) {
+if (mysqli_num_rows($result) > 0) {
     // looping through all results
     $response["leaders"] = array();
     
-    while ($row = mysql_fetch_array($result)) {
+    while ($row = mysqli_fetch_array($result)) {
         // temp user array
         $product = array();
         $product["area"] = $row["area"];
