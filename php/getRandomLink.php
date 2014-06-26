@@ -16,14 +16,17 @@ $response = array();
 require_once __DIR__ . '/db_config.php';
 
 // connecting to db
-$con = mysqli_connect(DB_SERVER, DB_USER, DB_PASSWORD, DB_DATABASE) or die(mysqli_error());
+$con = mysqli_connect(DB_SERVER, DB_USER, DB_PASSWORD, DB_DATABASE);
+if (mysqli_connect_errno()) {
+    error_log "Failed to connect to MySQL: " . mysqli_connect_error();
+}
     
 // Get a random link from the links table
 $select = "SELECT * FROM links WHERE anstype='T' AND difficulty BETWEEN $difflow AND $diffhigh ORDER BY RAND() LIMIT 1";
-$result = mysqli_query($con, $select) or die(mysql_error());
+$result = mysqli_query($con, $select) or die(mysqli_error());
 
 // check for empty result
-if (mysqli_num_rows($con, $result) > 0) {
+if (mysqli_num_rows($result) > 0) {
     header('Content-Type: application/json');
     // looping through all results
     $response["links"] = array();
