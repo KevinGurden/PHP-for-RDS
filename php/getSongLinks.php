@@ -30,7 +30,7 @@ error_log("getSongLinks query");
 // Get link from the links table
 if ($avoidLTs!="") {$avoidLTs = "AND LOCATE(linktype, '$avoidLTs')=0";};
 if ($avoidSongs!="") {$avoidSongs = "AND LOCATE(songidB, '$avoidSongs')=0";};
-$select = "SELECT * FROM links WHERE songidA=$songid AND artistA='$artist' AND (difficulty BETWEEN $difflow AND $diffhigh) $avoidLTs $avoidSongs";
+$select = 'SELECT * FROM links WHERE songidA=$songid AND artistA="$artist" AND (difficulty BETWEEN $difflow AND $diffhigh) $avoidLTs $avoidSongs';
 $result = mysql_query($select) or die(mysql_error());
 
 error_log("getSongLinks done query");
