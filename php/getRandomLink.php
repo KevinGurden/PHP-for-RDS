@@ -12,17 +12,18 @@ $difflow = $diff - 0.1;   // .. and for lower
 $response = array();
 
 // Include db connect class
-require_once __DIR__ . '/db_connect.php';
+//require_once __DIR__ . '/db_connect.php';
+require_once __DIR__ . '/db_config.php';
 
 // connecting to db
-$db = new DB_CONNECT();
-
+$con = mysqli_connect(DB_SERVER, DB_USER, DB_PASSWORD, DB_DATABASE) or die(mysqli_error());
+    
 // Get a random link from the links table
 $select = "SELECT * FROM links WHERE anstype='T' AND difficulty BETWEEN $difflow AND $diffhigh ORDER BY RAND() LIMIT 1";
-$result = mysql_query($select) or die(mysql_error());
+$result = mysqli_query($con, $select) or die(mysql_error());
 
 // check for empty result
-if (mysql_num_rows($result) > 0) {
+if (mysqli_num_rows($con, $result) > 0) {
     header('Content-Type: application/json');
     // looping through all results
     $response["links"] = array();
