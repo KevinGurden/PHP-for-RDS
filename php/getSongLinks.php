@@ -5,7 +5,7 @@
 header('Access-Control-Allow-Origin: *');
 
 $songid = $_GET['songid'];
-$artist = $_GET['artist']; $artist = $mysqli->real_escape_string($artist);
+$artist = $_GET['artist']; $artist = mysql_real_escape_string($artist);
 $difflow = $_GET['difflow'];
 $diffhigh = $_GET['diffhigh'];
 $avoidLTs = $_GET['avoidlts'];
