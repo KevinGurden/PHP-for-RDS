@@ -28,7 +28,7 @@ class DB_CONNECT {
         $con = mysqli_connect(DB_SERVER, DB_USER, DB_PASSWORD) or die(mysql_error());
 
         // Selecing database
-        $db = mysqli_select_db(DB_DATABASE) or die(mysql_error()) or die(mysql_error());
+        $db = mysqli_select_db($con, DB_DATABASE) or die(mysql_error()) or die(mysql_error());
 
         // returing connection cursor
         return $con;
@@ -39,7 +39,7 @@ class DB_CONNECT {
      */
     function close() {
         // closing db connection
-        mysqli_close();
+        mysqli_close($con);
     }
 
 }
