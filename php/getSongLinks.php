@@ -29,9 +29,9 @@ error_log("getSongLinks query");
 // Get link from the links table
 if ($avoidLTs!="") {$avoidLTs = "AND LOCATE(linktype, '$avoidLTs')=0";};
 if ($avoidSongs!="") {$avoidSongs = "AND LOCATE(songidB, '$avoidSongs')=0";};
-$artist = mysqli_real_escape_string($db, $artist);  // Get rid of any single quotes first
+$artist = mysqli_real_escape_string($con, $artist);  // Get rid of any single quotes first
 $select = "SELECT * FROM links WHERE songidA=$songid AND artistA='$artist' AND (difficulty BETWEEN $difflow AND $diffhigh) $avoidLTs $avoidSongs";
-$result = mysqli_query($db, $select) or die(mysqli_error());
+$result = mysqli_query($con, $select) or die(mysqli_error());
 
 error_log("getSongLinks done query");
     
@@ -41,7 +41,7 @@ if (mysqli_num_rows($result) > 0) {
     // looping through all results
     $response["links"] = array();
     
-    while ($row = mysql_fetch_array($result)) {
+    while ($row = mysqli_fetch_array($result)) {
         // temp user array
         $product = array();
         $product["songidA"] = $row["songidA"];
