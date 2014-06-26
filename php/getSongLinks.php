@@ -17,13 +17,12 @@ $avoidSongs = $_GET['avoidsongs'];
 // Array for JSON response
 $response = array();
 
-// Include db connect class
-require_once __DIR__ . '/db_connect.php';
-
-error_log("getSongLinks connect");
-
+require_once __DIR__ . '/db_config.php';
 // connecting to db
-$db = new DB_CONNECT();
+$con = mysqli_connect(DB_SERVER, DB_USER, DB_PASSWORD, DB_DATABASE);
+if (mysqli_connect_errno()) {
+    error_log("Failed to connect to MySQL: " . mysqli_connect_error());
+};
 
 error_log("getSongLinks query");
 
@@ -32,12 +31,12 @@ if ($avoidLTs!="") {$avoidLTs = "AND LOCATE(linktype, '$avoidLTs')=0";};
 if ($avoidSongs!="") {$avoidSongs = "AND LOCATE(songidB, '$avoidSongs')=0";};
 $artist = mysqli_real_escape_string($db, $artist);  // Get rid of any single quotes first
 $select = "SELECT * FROM links WHERE songidA=$songid AND artistA='$artist' AND (difficulty BETWEEN $difflow AND $diffhigh) $avoidLTs $avoidSongs";
-$result = mysqli_query($db, $select) or die(mysql_error());
+$result = mysqli_query($db, $select) or die(mysqli_error());
 
 error_log("getSongLinks done query");
     
 // check for empty result
-if (mysql_num_rows($result) > 0) {
+if (mysqli_num_rows($result) > 0) {
     header('Content-Type: application/json');
     // looping through all results
     $response["links"] = array();

@@ -12,14 +12,14 @@ $difflow = $diff - 0.1;   // .. and for lower
 $response = array();
 
 // Include db connect class
-//require_once __DIR__ . '/db_connect.php';
 require_once __DIR__ . '/db_config.php';
 
 // connecting to db
 $con = mysqli_connect(DB_SERVER, DB_USER, DB_PASSWORD, DB_DATABASE);
 if (mysqli_connect_errno()) {
-    error_log "Failed to connect to MySQL: " . mysqli_connect_error();
-}
+    error_log("Failed to connect to MySQL: " . mysqli_connect_error());
+    error_log(mysqli_connect_error());
+};
     
 // Get a random link from the links table
 $select = "SELECT * FROM links WHERE anstype='T' AND difficulty BETWEEN $difflow AND $diffhigh ORDER BY RAND() LIMIT 1";
