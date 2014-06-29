@@ -5,8 +5,8 @@
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
 
-if(isset($_GET('limit'))) {
-    $lim = $_GET('limit');
+if(isset($_GET['limit'])) {
+    $lim = $_GET['limit'];
 } else {
     $lim = "25";
 };
