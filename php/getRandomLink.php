@@ -7,6 +7,7 @@ header('Access-Control-Allow-Origin: *');
 $diff = $_GET['diff'];
 $diffhigh = $diff + 0.1;  // Set higher limit on difficulty
 $difflow = $diff - 0.1;   // .. and for lower
+$lt = $_GET['linktype'];
 
 // Array for JSON response
 $response = array();
@@ -21,7 +22,7 @@ if (mysqli_connect_errno()) {
 };
     
 // Get a random link from the links table
-$select = "SELECT * FROM links WHERE anstype='T' AND difficulty BETWEEN $difflow AND $diffhigh ORDER BY RAND() LIMIT 1";
+$select = "SELECT * FROM links WHERE anstype='T' AND difficulty BETWEEN $difflow AND $diffhigh AND linktype=$lt ORDER BY RAND() LIMIT 1";
 $result = mysqli_query($con, $select) or die(mysqli_error());
 
 // check for empty result
