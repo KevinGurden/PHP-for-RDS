@@ -23,5 +23,5 @@ if (mysqli_connect_errno()) {
 
 // Insert a leader into the table
 $insert = "INSERT INTO leaders(uuid,name,score7,date7,scoreall,dateall,city,area,country,model);
-$result = mysqli_query($con, $insert) or die(mysql_error());
+$result = mysqli_query($con, $insert) or die(mysql_error($con));
 ?>
