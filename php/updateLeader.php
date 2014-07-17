@@ -13,7 +13,7 @@ if(isset($_GET['scoreall']) && isset($_GET['dateall'])) {
 } else {
     $plus = "";
 };
-
+    
 // Include db connect class
 require_once __DIR__ . '/db_config.php';
 
@@ -27,5 +27,6 @@ if (mysqli_connect_errno()) {
 // Update a leader entry into the table
 $scores = "score7=$score7,date7=$date7$plus";
 $insert = "UPDATE leaders SET $scores WHERE uuid=$uuid";
+error_log("$insert");
 $result = mysqli_query($con, $insert) or die(mysqli_error($con));
 ?>
