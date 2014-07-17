@@ -9,7 +9,7 @@ $score7 = $_GET['score7']; $date7 = $_GET['date7'];
 if(isset($_GET['scoreall']) && isset($_GET['dateall'])) {
     $scoreall = $_GET['scoreall'];
     $dateall = $_GET['dateall'];
-    $plus = ",scoreall=$scoreall,dateall=$dateall"
+    $plus = ",scoreall=$scoreall,dateall=$dateall";
 } else {
     $plus = "";
 };
