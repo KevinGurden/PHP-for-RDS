@@ -27,5 +27,5 @@ if (mysqli_connect_errno()) {
 // Update a leader entry into the table
 $scores = "score7=$score7,date7=$date7$plus";
 $insert = "UPDATE leaders SET $scores WHERE uuid=$uuid";
-$result = mysqli_query($con, $insert) or die(mysql_error($con));
+$result = mysqli_query($con, $insert) or die(mysqli_error($con));
 ?>
