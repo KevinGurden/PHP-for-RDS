@@ -6,7 +6,7 @@ header('Access-Control-Allow-Origin: *');
 
 $uuid = $_GET['uuid'];
 $score7 = $_GET['score7']; $date7 = $_GET['date7'];
-$scoreAll = $_GET['scoreAll']; $dateAll = $_GET['dateAll'];
+$scoreall = $_GET['scoreall']; $dateall = $_GET['dateall'];
 
 // Include db connect class
 require_once __DIR__ . '/db_config.php';
@@ -19,7 +19,7 @@ if (mysqli_connect_errno()) {
 
 
 // Update a leader entry into the table
-$scores = "score7=$score7,date7=$date7,scoreall=$scoreAll,dateall=$dateAll";
+$scores = "score7=$score7,date7=$date7,scoreall=$scoreall,dateall=$dateall";
 $insert = "UPDATE leaders SET $scores WHERE uuid=$uuid";
 $result = mysqli_query($con, $insert) or die(mysql_error($con));
 ?>
