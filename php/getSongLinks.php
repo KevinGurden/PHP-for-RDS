@@ -61,8 +61,8 @@ if (mysqli_num_rows($result) > 0) {
     $response["success"] = 1;
 
     // echoing JSON response
-    echo json_encode($response);
-    error_log("getSongLinks sent");
+    // echo json_encode($response);
+    // error_log("getSongLinks sent");
 } else {
     header('Content-Type: application/json');
     $response["success"] = 0;
@@ -71,6 +71,6 @@ if (mysqli_num_rows($result) > 0) {
     error_log($response["message"]);
 
     // echo no users JSON
-    echo json_encode($response);
+    // echo json_encode($response);
 }
 ?>
