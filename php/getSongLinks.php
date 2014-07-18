@@ -4,12 +4,10 @@
  */
 header('Access-Control-Allow-Origin: *');
 
-$songid = $_GET['songid'];
-$artist = $_GET['artist'];
-$difflow = $_GET['difflow'];
-$diffhigh = $_GET['diffhigh'];
-$avoidLTs = $_GET['avoidlts'];
-$avoidSongs = $_GET['avoidsongs'];
+$songid = $_GET['songid']; $artist = $_GET['artist'];
+$difflow = $_GET['difflow']; $diffhigh = $_GET['diffhigh'];
+$avoidLTs = $_GET['avoidlts']; $avoidSongs = $_GET['avoidsongs'];
+if (isset($_GET['purch'])) {$purchased = $_GET['purch'];} else {$purchased = ""};
     
 //header('Content-Type: text/html');
 //error_log("getSongLinks: songid=$songid, artist=$artist, difflow=$difflow, diffhigh=$diffhigh, avoidLTs=$avoidLTs, avoidSongs=$avoidSongs");
@@ -29,8 +27,13 @@ error_log("getSongLinks query");
 // Get link from the links table
 if ($avoidLTs!="") {$avoidLTs = "AND LOCATE(linktype, '$avoidLTs')=0";};
 if ($avoidSongs!="") {$avoidSongs = "AND LOCATE(songidB, '$avoidSongs')=0";};
+if ($purchased="") {
+    $types = "";
+} else {
+    $types = "AND (purchaseA='' AND purchaseB='') OR (purchaseA IN($purchase) AND purchaseB IN($purchase))"
+};
 $artist = mysqli_real_escape_string($con, $artist);  // Get rid of any single quotes first
-$select = "SELECT * FROM links WHERE songidA=$songid AND artistA='$artist' AND (difficulty BETWEEN $difflow AND $diffhigh) $avoidLTs $avoidSongs";
+$select = "SELECT * FROM links WHERE songidA=$songid AND artistA='$artist' AND (difficulty BETWEEN $difflow AND $diffhigh) $avoidLTs $avoidSongs $types";
 $result = mysqli_query($con, $select) or die(mysqli_error($con));
 
 error_log("getSongLinks done query");
@@ -61,7 +64,7 @@ if (mysqli_num_rows($result) > 0) {
     $response["success"] = 1;
 
     // echoing JSON response
-    // echo json_encode($response);
+    echo json_encode($response);
     // error_log("getSongLinks sent");
 } else {
     header('Content-Type: application/json');
@@ -70,7 +73,7 @@ if (mysqli_num_rows($result) > 0) {
     header('Content-Type: text/html');
     error_log($response["message"]);
 
-    // echo no users JSON
-    // echo json_encode($response);
+    // echo no links
+    echo json_encode($response);
 }
 ?>
