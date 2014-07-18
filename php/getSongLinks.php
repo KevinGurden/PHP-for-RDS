@@ -7,7 +7,11 @@ header('Access-Control-Allow-Origin: *');
 $songid = $_GET['songid']; $artist = $_GET['artist'];
 $difflow = $_GET['difflow']; $diffhigh = $_GET['diffhigh'];
 $avoidLTs = $_GET['avoidlts']; $avoidSongs = $_GET['avoidsongs'];
-if (isset($_GET['purch'])) {$purchased = $_GET['purch'];} else {$purchased = ""};
+if (isset($_GET['purch'])) {
+    $purchased = $_GET['purch'];
+} else {
+    $purchased = "";
+};
     
 //header('Content-Type: text/html');
 //error_log("getSongLinks: songid=$songid, artist=$artist, difflow=$difflow, diffhigh=$diffhigh, avoidLTs=$avoidLTs, avoidSongs=$avoidSongs");
