@@ -13,8 +13,8 @@ if (isset($_GET['purch'])) {
     $purchased = "";
 };
     
-//header('Content-Type: text/html');
-//error_log("getSongLinks: songid=$songid, artist=$artist, difflow=$difflow, diffhigh=$diffhigh, avoidLTs=$avoidLTs, avoidSongs=$avoidSongs");
+header('Content-Type: text/html');
+error_log("getSongLinks: songid=$songid, artist=$artist, difflow=$difflow, diffhigh=$diffhigh, avoidLTs=$avoidLTs, avoidSongs=$avoidSongs, purchased=$purchased");
 
 // Array for JSON response
 $response = array();
@@ -31,10 +31,10 @@ if (mysqli_connect_errno()) {
 // Get link from the links table
 if ($avoidLTs!="") {$avoidLTs = "AND LOCATE(linktype, '$avoidLTs')=0";};
 if ($avoidSongs!="") {$avoidSongs = "AND LOCATE(songidB, '$avoidSongs')=0";};
-if ($purchased="") {
+if ($purchased=="") {
     $types = "";
 } else {
-    $types = "AND (purchaseA='' AND purchaseB='') OR (purchaseA IN($purchase) AND purchaseB IN($purchase))";
+    $types = "AND (purchaseA='' AND purchaseB='') OR (purchaseA IN($purchased) AND purchaseB IN($purchased))";
 };
 $artist = mysqli_real_escape_string($con, $artist);  // Get rid of any single quotes first
 $select = "SELECT * FROM links WHERE songidA=$songid AND artistA='$artist' AND (difficulty BETWEEN $difflow AND $diffhigh) $avoidLTs $avoidSongs $types";
