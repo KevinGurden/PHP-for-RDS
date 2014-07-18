@@ -7,7 +7,7 @@ header('Access-Control-Allow-Origin: *');
 $uuid = $_GET['uuid'];
 $name = $_GET['name'];
 $score7 = $_GET['score7']; $date7 = $_GET['date7'];
-$scoreAll = $_GET['scoreAll']; $dateAll = $_GET['dateAll'];
+$scoreall = $_GET['scoreall']; $dateall = $_GET['dateall'];
 $city = $_GET['city']; $area = $_GET['area']; $country = $_GET['country'];
 $model = $_GET['model'];
     
