@@ -21,6 +21,6 @@ if (mysqli_connect_errno()) {
 
 
 // Get link from the links table
-$select = "UPDATE leaders SET name='$newname' WHERE uuid=$uuid";
-$result = mysqli_query($con, $select) or die(mysql_error());
+$select = "UPDATE leaders SET name='$newname' WHERE uuid='$uuid'";
+$result = mysqli_query($con, $select) or die(mysqli_error());
 ?>
