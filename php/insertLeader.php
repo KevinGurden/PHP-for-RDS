@@ -24,7 +24,7 @@ if (mysqli_connect_errno()) {
 // Insert a leader into the table
 $cols = "  uuid,   name,  score7,  date7,  scoreall,  dateall,   city,   area,   country,  model";
 $vals = "'$uuid','$name',$score7,'$date7',$scoreall,'$dateall','$city','$area','$country','$model'";
-$insert = "INSERT INTO leaders($cols) VALUES($uuid,)";
+$insert = "INSERT INTO leaders($cols) VALUES($vals)";
 $result = mysqli_query($con, $insert) or die(mysqli_error($con));
 error_log("$result: from $insert");
 ?>
