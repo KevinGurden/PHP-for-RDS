@@ -26,7 +26,7 @@ if (mysqli_connect_errno()) {
     error_log("Failed to connect to MySQL: " . mysqli_connect_error());
 };
 
-error_log("getSongLinks query");
+//error_log("getSongLinks query");
 
 // Get link from the links table
 if ($avoidLTs!="") {$avoidLTs = "AND LOCATE(linktype, '$avoidLTs')=0";};
@@ -40,7 +40,7 @@ $artist = mysqli_real_escape_string($con, $artist);  // Get rid of any single qu
 $select = "SELECT * FROM links WHERE songidA=$songid AND artistA='$artist' AND (difficulty BETWEEN $difflow AND $diffhigh) $avoidLTs $avoidSongs $types";
 $result = mysqli_query($con, $select) or die(mysqli_error($con));
 
-error_log("getSongLinks done query");
+error_log("getSongLinks done query: $select");
     
 // check for empty result
 if (mysqli_num_rows($result) > 0) {
