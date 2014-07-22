@@ -21,8 +21,9 @@ if (mysqli_connect_errno()) {
 
 
 // Get link from the links table
+$newname = mysqli_real_escape_string($con, $newname);
 $update = "UPDATE leaders SET name='$newname' WHERE uuid='$uuid'";
-    error_log("Rename ready($result). $update");
+error_log("Rename ready. $update");
 $result = mysqli_query($con, $update) or die(mysqli_error($con));
 error_log("Rename finished($result). $update");
 ?>
