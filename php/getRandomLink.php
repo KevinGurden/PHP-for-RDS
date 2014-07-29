@@ -8,7 +8,7 @@ if (isset($_GET['v'])) {$version = $_GET['v'];} else {$version = 0;};
 $diff = $_GET['diff'];
 $diffhigh = $diff + 0.2;  // Set higher limit on difficulty
 $difflow = $diff - 0.2;   // .. and for lower
-error_log($response["v=$version"]);
+error_log("v=$version");
     
 // Array for JSON response
 $response = array();
