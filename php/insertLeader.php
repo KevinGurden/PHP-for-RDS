@@ -4,15 +4,8 @@
  */
 header('Access-Control-Allow-Origin: *');
 
-$uuid = $_GET['uuid']; $name = $_GET['name'];
-if(isset($_GET['gamesplayed']) && $_GET['level7']) && $_GET['levelall'])) {
-    $gamesplayed = $_GET['gamesplayed']; $level7 = $_GET['level7']; $levelall = $_GET['levelall'];
-    $pluscols = ", gamesplayed, level7,    levelall";
-    $plusvals = ",$gamesplayed,'$level7','$levelall'"
-} else {
-    $pluscols = ""
-    $plusvals = "";
-};
+$uuid = $_GET['uuid'];
+$name = $_GET['name'];
 $score7 = $_GET['score7']; $date7 = $_GET['date7'];
 $scoreall = $_GET['scoreall']; $dateall = $_GET['dateall'];
 $city = $_GET['city']; $area = $_GET['area']; $country = $_GET['country'];
@@ -28,6 +21,23 @@ if (mysqli_connect_errno()) {
 };
 
 
+// Escape the values to ensure no injection
+$uuid = mysqli_real_escape_string($con, $uuid);
+$name = mysqli_real_escape_string($con, $name);
+if(isset($_GET['gamesplayed']) && $_GET['level7']) && $_GET['levelall'])) {
+    $gamesplayed = $_GET['gamesplayed']; $level7 = $_GET['level7']; $levelall = $_GET['levelall'];
+    $gamesplayed = mysqli_real_escape_string($con, $gamesplayed);
+    $level7 = mysqli_real_escape_string($on, $level7); $levelall = mysqli_real_escape_string($on, $levelall);
+    $pluscols = ", gamesplayed, level7,    levelall";
+    $plusvals = ",$gamesplayed,'$level7','$levelall'"
+} else {
+    $pluscols = ""
+    $plusvals = "";
+};
+$score7 = mysqli_real_escape_string($con, $score7); $date7 = mysqli_real_escape_string($con, $date7);
+$city = mysqli_real_escape_string($con, $city); $area = mysqli_real_escape_string($con, $area); $country = mysqli_real_escape_string($con, $country);
+$model = mysqli_real_escape_string($con, $model);
+    
 // Insert a leader into the table
 $cols = "  uuid,   name,  score7,  date7,  scoreall,  dateall,   city,   area,   country,  model";
 $vals = "'$uuid','$name',$score7,'$date7',$scoreall,'$dateall','$city','$area','$country','$model'";
