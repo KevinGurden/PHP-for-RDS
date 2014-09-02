@@ -5,13 +5,18 @@
 header('Access-Control-Allow-Origin: *');
 
 $uuid = $_GET['uuid'];
-$score7 = $_GET['score7']; $date7 = $_GET['date7'];
-if(isset($_GET['scoreall']) && isset($_GET['dateall'])) {
-    $scoreall = $_GET['scoreall'];
-    $dateall = $_GET['dateall'];
-    $plus = ",scoreall=$scoreall,dateall='$dateall'";
+$score7 = $_GET['score7']; $date7 = $_GET['date7']; $level7 = $_GET['level7'];
+if(isset($_GET['scoreall']) && isset($_GET['dateall']) && isset($_GET['levelall'])) {
+    $scoreall = $_GET['scoreall']; $dateall = $_GET['dateall']; $levelall = $_GET['levelall'];
+    $plus = ",scoreall=$scoreall,dateall='$dateall',levelall='$levelall'";
 } else {
     $plus = "";
+};
+if(isset($_GET['gamesplayed'])) {
+    $gamesplayed = $_GET['gamesplayed'];
+    $played = ",gamesplayed=$gamesplayed";
+} else {
+    $played = ",gamesplayed=0";
 };
     
 // Include db connect class
@@ -25,7 +30,7 @@ if (mysqli_connect_errno()) {
 
 
 // Update a leader entry into the table
-$scores = "score7=$score7,date7='$date7'$plus";
+$scores = "gamesplayed=$gamesplayed,score7=$score7,date7='$date7',level7='$level7'$plus$played";
 $insert = "UPDATE leaders SET $scores WHERE uuid='$uuid'";
 error_log("$insert");
 $result = mysqli_query($con, $insert) or die(mysqli_error($con));

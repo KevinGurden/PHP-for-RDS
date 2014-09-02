@@ -4,8 +4,15 @@
  */
 header('Access-Control-Allow-Origin: *');
 
-$uuid = $_GET['uuid'];
-$name = $_GET['name'];
+$uuid = $_GET['uuid']; $name = $_GET['name'];
+if(isset($_GET['gamesplayed']) && $_GET['level7']) && $_GET['levelall'])) {
+    $gamesplayed = $_GET['gamesplayed']; $level7 = $_GET['level7']; $levelall = $_GET['levelall'];
+    $pluscols = ", gamesplayed, level7,    levelall";
+    $plusvals = ",$gamesplayed,'$level7','$levelall'"
+} else {
+    $pluscols = ""
+    $plusvals = "";
+};
 $score7 = $_GET['score7']; $date7 = $_GET['date7'];
 $scoreall = $_GET['scoreall']; $dateall = $_GET['dateall'];
 $city = $_GET['city']; $area = $_GET['area']; $country = $_GET['country'];
@@ -24,7 +31,7 @@ if (mysqli_connect_errno()) {
 // Insert a leader into the table
 $cols = "  uuid,   name,  score7,  date7,  scoreall,  dateall,   city,   area,   country,  model";
 $vals = "'$uuid','$name',$score7,'$date7',$scoreall,'$dateall','$city','$area','$country','$model'";
-$insert = "INSERT INTO leaders($cols) VALUES($vals)";
+$insert = "INSERT INTO leaders($cols$pluscols) VALUES($vals$plusvals)";
 $result = mysqli_query($con, $insert) or die(mysqli_error($con));
 error_log("$result: from $insert");
 ?>
