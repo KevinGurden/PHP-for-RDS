@@ -32,7 +32,7 @@ if (mysqli_connect_errno()) {
 if ($avoidLTs!="") {$avoidLTs = "AND LOCATE(linktype, '$avoidLTs')=0";};
 if ($avoidSongs!="") {$avoidSongs = "AND LOCATE(songidB, '$avoidSongs')=0";};
 if ($purchased=="") {
-    $types = "";
+    $types = "AND purchA='G' AND purchB='G'";
 } else {
     $types = "AND (purchA='' OR purchB='' OR (purchA IN($purchased) AND purchB IN($purchased)))";
 };
