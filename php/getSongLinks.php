@@ -34,7 +34,7 @@ if ($avoidSongs!="") {$avoidSongs = "AND LOCATE(songidB, '$avoidSongs')=0";};
 if ($purchased=="") {
     $types = "";
 } else {
-    $types = "AND (purchA='' AND purchB='') OR (purchA IN($purchased) AND purchB IN($purchased))";
+    $types = "AND (purchA='' OR purchB='' OR (purchA IN($purchased) AND purchB IN($purchased)))";
 };
 $artist = mysqli_real_escape_string($con, $artist);  // Get rid of any single quotes first
 $select = "SELECT * FROM links WHERE songidA=$songid AND artistA='$artist' AND (difficulty BETWEEN $difflow AND $diffhigh) $avoidLTs $avoidSongs $types";
