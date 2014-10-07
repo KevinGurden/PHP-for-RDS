@@ -24,7 +24,7 @@ if (mysqli_connect_errno()) {
 // Escape the values to ensure no injection
 $uuid = mysqli_real_escape_string($con, $uuid);
 $name = mysqli_real_escape_string($con, $name);
-if(isset($_GET['gamesplayed']) && $_GET['level7']) && $_GET['levelall'])) {
+if(isset($_GET['gamesplayed']) && isset($_GET['level7']) && isset($_GET['levelall'])) {
     $gamesplayed = $_GET['gamesplayed']; $level7 = $_GET['level7']; $levelall = $_GET['levelall'];
     $gamesplayed = mysqli_real_escape_string($con, $gamesplayed);
     $level7 = mysqli_real_escape_string($on, $level7); $levelall = mysqli_real_escape_string($on, $levelall);
