@@ -31,7 +31,7 @@ if(isset($_GET['gamesplayed']) && isset($_GET['level7']) && isset($_GET['levelal
     $pluscols = ", gamesplayed, level7,    levelall";
     $plusvals = ",$gamesplayed,'$level7','$levelall'"
 } else {
-    $pluscols = ""
+    $pluscols = "";
     $plusvals = "";
 };
 $score7 = mysqli_real_escape_string($con, $score7); $date7 = mysqli_real_escape_string($con, $date7);
