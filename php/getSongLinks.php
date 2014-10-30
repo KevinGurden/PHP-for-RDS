@@ -1,6 +1,7 @@
 <?php
 /*
  * Retrun all links from a particular song 
+ * 1.2 Limit the returned records if LIMIT is passed
  */
 header('Access-Control-Allow-Origin: *');
 
@@ -12,6 +13,13 @@ if (isset($_GET['purch'])) {
 } else {
     $purchased = "";
 };
+// 1.2 Limit the returned records if this is set
+if (isset($_GET['limit'])) {
+    $limit = $_GET['limit']; $order = "ORDER BY RAND()";
+} else {
+    $limit = ""; $order = "";
+};
+
     
 header('Content-Type: text/html');
 error_log("getSongLinks: songid=$songid, artist=$artist, difflow=$difflow, diffhigh=$diffhigh, avoidLTs=$avoidLTs, avoidSongs=$avoidSongs, purchased=$purchased");
@@ -37,7 +45,7 @@ if ($purchased=="") {
     $types = "AND (purchA='' OR purchB='' OR (purchA IN($purchased) AND purchB IN($purchased)))";
 };
 $artist = mysqli_real_escape_string($con, $artist);  // Get rid of any single quotes first
-$select = "SELECT * FROM links WHERE songidA=$songid AND artistA='$artist' AND (difficulty BETWEEN $difflow AND $diffhigh) $avoidLTs $avoidSongs $types";
+$select = "SELECT * FROM links WHERE songidA=$songid AND artistA='$artist' AND (difficulty BETWEEN $difflow AND $diffhigh) $avoidLTs $avoidSongs $types $order $limit";
 $result = mysqli_query($con, $select) or die(mysqli_error($con));
 
 error_log("getSongLinks done query: $select");
