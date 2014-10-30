@@ -15,7 +15,7 @@ if (isset($_GET['purch'])) {
 };
 // 1.2 Limit the returned records if this is set
 if (isset($_GET['limit'])) {
-    $limit = $_GET['limit']; $order = "ORDER BY RAND()";
+    $limit = $_GET['limit']; $limit = "LIMIT $limit"; $order = "ORDER BY RAND()";
 } else {
     $limit = ""; $order = "";
 };
