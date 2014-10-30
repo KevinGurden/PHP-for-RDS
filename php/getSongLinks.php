@@ -22,7 +22,7 @@ if (isset($_GET['limit'])) {
 
     
 header('Content-Type: text/html');
-error_log("getSongLinks: songid=$songid, artist=$artist, difflow=$difflow, diffhigh=$diffhigh, avoidLTs=$avoidLTs, avoidSongs=$avoidSongs, purchased=$purchased, limit=$limit");
+//error_log("getSongLinks: songid=$songid, artist=$artist, difflow=$difflow, diffhigh=$diffhigh, avoidLTs=$avoidLTs, avoidSongs=$avoidSongs, purchased=$purchased, limit=$limit");
 
 // Array for JSON response
 $response = array();
@@ -46,7 +46,7 @@ if ($purchased=="") {
 };
 $artist = mysqli_real_escape_string($con, $artist);  // Get rid of any single quotes first
 $select = "SELECT * FROM links WHERE songidA=$songid AND artistA='$artist' AND (difficulty BETWEEN $difflow AND $diffhigh) $avoidLTs $avoidSongs $types $order $limit";
-error_log("getSongLinks done query: $select");
+//error_log("getSongLinks done query: $select");
 $result = mysqli_query($con, $select) or die(mysqli_error($con));
     
 // check for empty result
