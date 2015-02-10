@@ -4,10 +4,13 @@
  * 1.2 Limit the returned records if LIMIT is passed
  */
 header('Access-Control-Allow-Origin: *');
-
-$songid = $_GET['songid']; $artist = $_GET['artist'];
-$difflow = $_GET['difflow']; $diffhigh = $_GET['diffhigh'];
-$avoidLTs = $_GET['avoidlts']; $avoidSongs = $_GET['avoidsongs'];
+$rating = isset( $_GET['rating'] )? $_GET['rating']: false;
+$songid = isset( $_GET['songid'] )? $_GET['songid']: false; 
+$artist = isset( $_GET['artist'] )? $_GET['artist']: false; 
+$difflow = isset( $_GET['difflow'] )? $_GET['difflow']: false; 
+$diffhigh = isset( $_GET['diffhigh'] )? $_GET['diffhigh']: false; 
+$avoidLTs = isset( $_GET['avoidLTs'] )? $_GET['avoidLTs']: false; 
+$avoidsongs = isset( $_GET['avoidsongs'] )? $_GET['avoidsongs']: false;
 if (isset($_GET['purch'])) {
     $purchased = $_GET['purch'];
 } else {
