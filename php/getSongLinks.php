@@ -4,13 +4,12 @@
  * 1.2 Limit the returned records if LIMIT is passed
  */
 header('Access-Control-Allow-Origin: *');
-$rating = isset( $_GET['rating'] )? $_GET['rating']: false;
 $songid = isset( $_GET['songid'] )? $_GET['songid']: false; 
 $artist = isset( $_GET['artist'] )? $_GET['artist']: false; 
 $difflow = isset( $_GET['difflow'] )? $_GET['difflow']: false; 
 $diffhigh = isset( $_GET['diffhigh'] )? $_GET['diffhigh']: false; 
 $avoidLTs = isset( $_GET['avoidLTs'] )? $_GET['avoidLTs']: false; 
-$avoidsongs = isset( $_GET['avoidsongs'] )? $_GET['avoidsongs']: false;
+$avoidSongs = isset( $_GET['avoidSongs'] )? $_GET['avoidSongs']: false;
 if (isset($_GET['purch'])) {
     $purchased = $_GET['purch'];
 } else {
@@ -49,7 +48,7 @@ if ($purchased=="") {
 };
 $artist = mysqli_real_escape_string($con, $artist);  // Get rid of any single quotes first
 $select = "SELECT * FROM links WHERE songidA=$songid AND artistA='$artist' AND (difficulty BETWEEN $difflow AND $diffhigh) $avoidLTs $avoidSongs $types $order $limit";
-//error_log("getSongLinks done query: $select");
+error_log("getSongLinks done query: $select");
 $result = mysqli_query($con, $select) or die(mysqli_error($con));
     
 // check for empty result
